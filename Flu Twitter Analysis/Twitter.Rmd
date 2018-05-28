@@ -1,0 +1,196 @@
+---
+output:
+  html_document: default
+  word_document: default
+---
+```{r}
+rm(list = ls())
+
+library(twitteR)
+library(ggplot2)
+library(plotly)
+library(maps)
+library("ggmap")
+library("maptools")
+library(revgeo)
+library(plyr)
+library(dplyr)
+library(RColorBrewer)
+```
+
+
+```{r}
+consumer_key = "8gVEzu0RXXXzTZ4XXXB5JWdhk"
+consumer_secret = "5iBIZzq2dhEsUYQbjMLEXXXXWtgyYy8jOA2qERXXjtn7Ah2y8"
+access_token = "548674986-XXXXXKUp4fYPDmi73B4Ia4Qo3uMqC02F2EUft4Gi"
+access_secret = "WqpL6j7xlIXXXXXQSMZBiIEml9hEHEDmRCXGzBvdVDW2E"
+
+#setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
+```
+
+```{r}
+# Collected tweets for flu and stored as csv file
+# 2/13/2018
+
+#tw_data1 = searchTwitter("flu OR #flu OR influenza OR #influenza OR H1N1 OR #H1N1 OR H3N2 OR
+#                         seasonalFlu OR #seasonalflu  OR #fluinfection", n = 10000, since = '2015-11-08')
+
+#tw_data2 = searchTwitter("flu OR #flu OR influenza OR #influenza OR H1N1 OR #H1N1 OR H3N2 OR
+#                         seasonalFlu OR #seasonalflu  OR #fluinfection", n = 10000, since = '2018-02-14')
+
+#tw_data3 = searchTwitter("flu OR #flu OR influenza OR #influenza OR H1N1 OR #H1N1 OR H3N2 OR
+#                         seasonalFlu OR #seasonalflu  OR #fluinfection", n = 15000, since = '2018-02-16')
+
+#tw_data4 = searchTwitter("flu OR #flu OR influenza OR #influenza OR H1N1 OR #H1N1 OR H3N2 OR
+#                         seasonalFlu OR #seasonalflu  OR #fluinfection", n = 15000, since = '2018-02-26')
+
+#tw_data5 = searchTwitter("flu OR #flu OR influenza OR #influenza OR H1N1 OR #H1N1 OR H3N2 OR
+#                         seasonalFlu OR #seasonalflu  OR #fluinfection", n = 25000, since = '2018-03-02')
+
+#tw_data6 = searchTwitter("flu OR #flu OR influenza OR #influenza OR H1N1 OR #H1N1 OR H3N2 OR
+#                         seasonalFlu OR #seasonalflu  OR #fluinfection", n = 25000, since = '2018-03-06')
+
+#tw_data7 = searchTwitter("flu OR #flu OR influenza OR #influenza OR H1N1 OR #H1N1 OR H3N2 OR
+#                         seasonalFlu OR #seasonalflu  OR #fluinfection", n = 25000, since = '2018-03-07')
+
+#tw_data8 = searchTwitter("flu OR #flu OR influenza OR #influenza OR H1N1 OR #H1N1 OR H3N2 OR
+#                         seasonalFlu OR #seasonalflu  OR #fluinfection", n = 25000, since = '2018-03-08')
+
+
+#df1 = twListToDF(tw_data1)
+#df2 = twListToDF(tw_data2)
+#df3 = twListToDF(tw_data3)
+#df4 = twListToDF(tw_data4)
+#df5 = twListToDF(tw_data5)
+#df6 = twListToDF(tw_data6)
+#df7 = twListToDF(tw_data7)
+#df8 = twListToDF(tw_data8)
+
+#write.csv(df1, "tweet_data1.csv")
+#write.csv(df2, "tweet_data2.csv")
+#write.csv(df3, "tweet_data3.csv")
+#write.csv(df4, "tweet_data4.csv")
+#write.csv(df5, "tweet_data5.csv")
+#write.csv(df6, "tweet_data6.csv")
+#write.csv(df7, "tweet_data7.csv")
+#write.csv(df8, "tweet_data8.csv")
+
+```
+
+```{r}
+## Read tweet data from stored csv files
+df1 = read.csv("C:\\Users\\Monalisa Mishra\\Desktop\\DIC\\Lab1\\Part3\\tweet_data1.csv")
+df2 = read.csv("C:\\Users\\Monalisa Mishra\\Desktop\\DIC\\Lab1\\Part3\\tweet_data2.csv")
+df3 = read.csv("C:\\Users\\Monalisa Mishra\\Desktop\\DIC\\Lab1\\Part3\\tweet_data3.csv")
+df4 = read.csv("C:\\Users\\Monalisa Mishra\\Desktop\\DIC\\Lab1\\Part3\\tweet_data4.csv")
+df5 = read.csv("C:\\Users\\Monalisa Mishra\\Desktop\\DIC\\Lab1\\Part3\\tweet_data5.csv")
+df6 = read.csv("C:\\Users\\Monalisa Mishra\\Desktop\\DIC\\Lab1\\Part3\\tweet_data6.csv")
+df7 = read.csv("C:\\Users\\Monalisa Mishra\\Desktop\\DIC\\Lab1\\Part3\\tweet_data7.csv")
+df8 = read.csv("C:\\Users\\Monalisa Mishra\\Desktop\\DIC\\Lab1\\Part3\\tweet_data8.csv")
+
+# To remove extra index coulmn
+df1 = df1[,-c(1)]
+df2 = df2[,-c(1)]
+df3 = df3[,-c(1)]
+df4 = df4[,-c(1)]
+df5 = df5[,-c(1)]
+df6 = df6[,-c(1)]
+df7 = df7[,-c(1)]
+df8 = df8[,-c(1)]
+
+# Combine them to form a common data frame
+tweet_data = rbind(df1,df2,df3,df4,df5,df6,df7,df8)
+
+tweet_data$longitude = as.numeric(tweet_data$longitude)
+tweet_data$latitude = as.numeric(tweet_data$latitude)
+
+# Separate tweets which have longitude and latitude information
+tweets = tweet_data[!is.na(tweet_data$longitude | tweet_data$latitude), ]
+tweets = tweets[,c("screenName","longitude","latitude")]
+
+dim(tweets) # total 288 tweets with locations
+```
+
+Collected 150000 tweets using keywords related to flu and stored them as csv files. Later, read those files and combined them to one dataframe and extracted tweets which had longitude and latitude information that led to 288 tweets in total.
+
+However, tweets are collected from all parts of the world and we require tweets from United States. Using US tweets and their location we can map them onto US map and get an overview.
+
+```{r}
+# Get US tweets
+for (i in 1:nrow(tweets)){
+  tweets$city[i] = revgeo(tweets$longitude[i], tweets$latitude[i], output='hash', item='city')
+  tweets$state[i] = revgeo(tweets$longitude[i], tweets$latitude[i], output='hash', item='state')
+  tweets$country[i] = revgeo(tweets$longitude[i], tweets$latitude[i], output='hash', item='country')
+}
+
+tweets = tweets[(tweets$country =="United States of America"),]
+
+# Remove Duplicates
+tweets = tweets[!duplicated(tweets), ]
+
+no_of_tweets = dim(tweets)
+print(paste0("Total number of USA tweets related to Flu: ", no_of_tweets[1]))
+
+```
+
+```{r}
+# Fill the states map according to Frequency of Tweets
+tweets$region = tolower(tweets$state)
+
+tweet_states = data.frame(tweets[c(5)])
+tweet_states = as.data.frame(table(unlist(tweet_states)))
+tweet_states$region = tolower(tweet_states$Var1)
+
+colnames(tweet_states) = c("States","Frequency","region")
+
+states = map_data("state")
+map.df = merge(states,tweet_states, by = "region", all.x = T)
+map.df = map.df[order(map.df$order),]
+
+# Get the code of the states to fill in the map
+code = data.frame(setNames(state.abb, state.name))
+code$region <- rownames(code)
+colnames(code) = c("code","region")
+code$region = tolower(code$region)
+
+map.df = merge(map.df,code, by = "region", all.x = T)
+map.df$hover <- with(map.df, paste(States, '<br>',"Frequency", Frequency))
+
+# States with Frequecy of tweets from its people
+tweet_states[,c(1,2)]
+
+# give state boundaries a white border
+l <- list(color = toRGB("white"), width = 2)
+# specify some map projection/options
+g <- list(
+  scope = 'usa',
+  projection = list(type = 'albers usa'),
+  showlakes = TRUE,
+  lakecolor = toRGB('white')
+)
+
+plot_geo(map.df, locationmode = 'USA-states') %>%
+  add_trace(
+    z = ~Frequency, text = ~hover, locations = ~code,
+    color = ~Frequency, colors = brewer.pal(9, "YlGnBu")
+  ) %>%
+  colorbar(title = "Frequency of Flu Tweets") %>%
+  layout(
+    title = 'Frequency of Influenza in USA based on Tweets about Flu',
+    geo = g
+  )
+
+```
+
+
+
+
+So, we see that people from Texas and Calfornia tweet about flu, which indicates that they are the most affected. Even health officials say that California has seen unusually high numbers of flu-related deaths and hospitalizations, which bolsters our findings. Texas had seen 6,832 combined adult flu and pneumonia deaths and 12 flu-related pediatric deaths as of the state's most recent report March 29. After that New York also can be taken into consideration for flu cases.
+
+
+
+
+
+
+
+
