@@ -12,21 +12,3 @@ My Projects done in Python, R and Spark (PySpark)
 
 4. Reproducible Work in R Environment - Using R integrated into Jupyter Notebook, produced almost same graphs as presented by Influenza Division of CDC, USA
 
-2017-2018 Influenza Season Week 4 ending January 27, 2018
-A Reproducible Work in R
-
-Synopsis: During week 4 (January 21-27, 2018), influenza activity increased in the United States.
-
-Viral Surveillance: The most frequently identified influenza virus subtype reported by public health laboratories during week 4 was influenza A(H3). The percentage of respiratory specimens testing positive for influenza in clinical laboratories remained elevated
-
-Pneumonia and Influenza Mortality: The proportion of deaths attributed to pneumonia and influenza (P&I) was above the system-specific epidemic threshold in the National Center for Health Statistics (NCHS) Mortality Surveillance System
-
-Influenza-associated Pediatric Deaths: A total of 53 influenza-associated pediatric deaths have been reported for the 2017-2018 season
-
-Influenza-associated Hospitalizations: A cumulative rate of 51.4 laboratory-confirmed influenza-associated hospitalizations per 100,000 population was reported
-
-Outpatient Illness Surveillance: The proportion of outpatient visits for influenza-like illness (ILI) was 7.1%, which is above the national baseline of 2.2%. All 10 regions reported ILI at or above region-specific baseline levels.
-
-ILINet State Activity Indicator Map: New York City, the District of Columbia, and 42 states experienced high ILI activity; Puerto Rico and two states experienced moderate ILI activity; three states experienced low ILI activity; and three states experienced minimal ILI activity
-
-https://www.cdc.gov/flu/weekly/weeklyarchives2017-2018/Week04.htm
