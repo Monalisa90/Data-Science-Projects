@@ -3,4 +3,4 @@ associated with flu using keywords. Filtered out tweets with geo-locations, foll
 Maps API. Plotted on the map of the USA with colors according to the number of tweets using Plotly and RColorBrewer library for a 
 general analysis of which states are more affected by Influenza.
 
-Loaded PDF due to large size of jupyter notebook.
+Uploaded PDF due to large size of jupyter notebook.
