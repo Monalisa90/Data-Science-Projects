@@ -3,4 +3,4 @@ Fraud can be defined as criminal deception with intent of acquiring financial ga
 
 Data mining technique is one notable methods used in solving credit fraud detection problem. Credit card fraud detection is the process of identifying those transactions that are fraudulent into two classes of legitimate (genuine) and fraudulent transactions. Credit card fraud detection is based on analysis of a card's spending behaviour. 
 
-In this analysis of credit card fraud detection, I'm using random forest, naive bayes and logistic regression techniques on highly skewed data based on accuracy, precision, recall, f1-score and AUC metrics. 
+In this analysis of credit card fraud detection, I'm using isolation forest, local outlier factor, random forest, naive bayes and logistic regression techniques on highly skewed data based on accuracy, precision, recall, f1-score and AUC metrics. 
