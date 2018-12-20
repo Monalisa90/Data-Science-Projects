@@ -1,7 +1,9 @@
 n = int(input())
 
+# Read input from stdin
 data = [[int(i) for i in input().strip().split()] for j in range(n)]
 
+# get column for each subject
 math = [data[i][0] for i in range(n)]
 phy  = [data[i][1] for i in range(n)]
 chem = [data[i][2] for i in range(n)]
