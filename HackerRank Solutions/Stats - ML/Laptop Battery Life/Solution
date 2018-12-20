@@ -1,0 +1,36 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+import pandas as pd
+
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import GradientBoostingRegressor
+
+
+if __name__ == '__main__':
+    timeCharged = float(input())
+    
+    data = pd.read_csv('trainingdata.txt', delimiter=',', header = None)
+    data.columns = ['charging_time','battery_time']
+
+    # From the data, it can be seen that to some point data i.e x and y are linearly related, but after a point it becomes constant. So, only those linear data points need to be consisdered, to get a better prediction
+    
+    data = data[data['battery_time'] < 8.00]
+    data = data.reset_index(drop = True)
+    
+    X = data.iloc[:, :-1].values
+    y = data.iloc[:, 1].values
+    
+    model = LinearRegression()
+    model.fit(X,y)
+    
+    prediction = model.predict(timeCharged)
+    prediction = round(prediction[0],2)
+    if prediction > 8.00:
+        prediction = 8.00
+    print(prediction)   
