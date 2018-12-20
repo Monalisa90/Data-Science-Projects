@@ -1,0 +1,22 @@
+n = int(input())
+
+data = [[int(i) for i in input().strip().split()] for j in range(n)]
+
+math = [data[i][0] for i in range(n)]
+phy  = [data[i][1] for i in range(n)]
+chem = [data[i][2] for i in range(n)]
+
+# correlation coefficient between Mathematics and Physics scores
+r1 = (n*sum([i*j for i,j in zip(math,phy)])) - sum(math)*sum(phy)
+r2 = (((n*sum([i**2 for i in math]))-sum(math)**2)*((n*sum([i**2 for i in phy]))-sum(phy)**2))**(1/2)
+print(round(r1/r2,2))
+
+# correlation coefficient between Physics and Chemistry scores
+r1 = (n*sum([i*j for i,j in zip(phy,chem)])) - sum(phy)*sum(chem)
+r2 = (((n*sum([i**2 for i in phy]))-sum(phy)**2)*((n*sum([i**2 for i in chem]))-sum(chem)**2))**(1/2)
+print(round(r1/r2,2))
+
+# correlation coefficient between Chemistry and Mathematics scores
+r1 = (n*sum([i*j for i,j in zip(math,chem)])) - sum(math)*sum(chem)
+r2 = (((n*sum([i**2 for i in math]))-sum(math)**2)*((n*sum([i**2 for i in chem]))-sum(chem)**2))**(1/2)
+print(round(r1/r2,2))
