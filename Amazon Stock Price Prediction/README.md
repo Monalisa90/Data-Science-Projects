@@ -1,0 +1,3 @@
+Price prediction is extremely crucial to most trading firms. People have been using various prediction techniques for many years. Trying to predict the stock market is always an enticing prospect. We see the daily up and downs of the market and imagine there must be patterns we, or our models, can learn in order to beat all those day traders with business degrees. 
+
+I will be using Long Short Term Memory (LSTM) network to do the predictions with 200 and 400 epochs.Long Short Term Memory networks are a special kind of RNN, capable of learning long-term dependencies. Remembering information for long periods of time is practically their default behavior, not something they struggle to learn!
