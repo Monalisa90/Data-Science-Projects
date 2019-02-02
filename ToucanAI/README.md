@@ -2,15 +2,15 @@ Using Spacy & NLTK, building a question classifier based on heuristics. I am usi
 
 1) If first word of the sentence is any of the interogative words, then it is a question
    
-   Eg.- 'How many Medieval Warm Period reconstructions were used'
+         Eg.- 'How many Medieval Warm Period reconstructions were used'
 
 2) If the sentence contains '?' mark, then it is a question
    
-   Eg.- 'Who announced she would step down as leader of the Conservatives?'
+         Eg.- 'Who announced she would step down as leader of the Conservatives?'
 
 3) If the second word or the last word of the sentence is any of the wh_words, then it is a question
    
-   Eg.- 'In what country is PloS Pathogens headquartered'
+         Eg.- 'In what country is PloS Pathogens headquartered'
         
         'Conservative Islam classifies non-Muslims who follow Shia interpretation as what'
 
