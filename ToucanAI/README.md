@@ -12,7 +12,7 @@ Using Spacy & NLTK, building a question classifier based on heuristics. I am usi
    
          Eg.- 'In what country is PloS Pathogens headquartered'
         
-        'Conservative Islam classifies non-Muslims who follow Shia interpretation as what'
+              'Conservative Islam classifies non-Muslims who follow Shia interpretation as what'
 
 4) If the sentence contains 'what':
    
