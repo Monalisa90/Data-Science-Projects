@@ -19,4 +19,5 @@ Using Spacy & NLTK, building a question classifier based on heuristics. I am usi
        Eg.- 'Along with mills and mines, in what industrial locations did steam drive cultivation'
             'The abolition of the Ottoman Caliphate is believed to have started what system'
    
-Still working on rules for 'which' word, as sometimes the 'which' word creates confusion in an interogative statement and non-intergative statement.
+Still working on rules for 'which' word, as sometimes the 'which' word creates confusion in an interogative statement and non-intergative 
+statement.
