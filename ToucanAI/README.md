@@ -1,6 +1,6 @@
 Using Spacy & NLTK, building a question classifier based on heuristics. I am using 4 conditions:
 
-1) If first word of the sentence is any of the interogative words, then it is a question
+1) If the first word of the sentence is any of the interogative words, then it is a question
    
          Eg.- 'How many Medieval Warm Period reconstructions were used'
 
